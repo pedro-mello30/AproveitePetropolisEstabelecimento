@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>cupons</ion-title>
+    <ion-buttons slot="end">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <div class="cupom-card">
+          <p>Validar Cupom</p>
+          <form class="form-edit">
+            <ion-input type="email" placeholder="Código"></ion-input>
+          </form>
+          <ion-col size="8" offset="2">
+            <ion-button expand="block">
+              Validar
+            </ion-button>
+          </ion-col>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <h5 class="title ion-margin-bottom">Cupons</h5>
+        <div class="cupom-list">
+          <div class="cupom-item"  >
+            <ion-thumbnail slot="start" [routerLink]="['feed/:idCategoria']">
+              <img src="assets/Untitled.png">
+            </ion-thumbnail>
+            <div class="content">
+              <ion-row>
+                <p class="title">Cupom 10%</p>
+                <a class="cupomLink ion-float-right">Gerenciar</a>
+              </ion-row>
+              <ion-row>
+                <span class="ativo"></span>
+                <p class="tags">Ativo</p>
+              </ion-row>
+              <ion-row>
+                <p class="description">Lorem ipsum dolor sit amet, consectetur</p>
+              </ion-row>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

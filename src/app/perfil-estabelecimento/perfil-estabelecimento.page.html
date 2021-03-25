@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <div class="perfil-card">
+          <div class="perfil-avatar">
+            <ion-avatar>
+              <img src="assets/Untitled.png">
+            </ion-avatar>
+            <p class="ion-no-margin">Fulano da Jabulani</p>
+          </div>
+
+
+          <div class="perfil-list-links">
+            <h5 class="subtitle">Configurações da conta</h5>
+            <ion-button expand="block" routerLink="/tabs/perfil/editar">
+              <span>
+                Informações Pessoais
+              </span>
+              <ion-icon slot="end"  name="person-outline"></ion-icon>
+            </ion-button>
+            <ion-button expand="block">
+              <span>
+                Senha
+              </span>
+              <ion-icon slot="end"  name="lock-closed-outline"></ion-icon>
+            </ion-button>
+            <ion-button expand="block">
+              <span>
+                Navegar
+              </span>
+              <ion-icon name="grid-outline"></ion-icon>
+            </ion-button>
+          </div>
+
+          <div class="perfil-list-links estabelecimento-list">
+            <h5 class="subtitle">Estabelecimento</h5>
+            <ion-button expand="block">
+              <span>
+                Informações do Estabelecimento
+              </span>
+              <ion-icon slot="end"  name="storefront-outline"></ion-icon>
+            </ion-button>
+            <ion-button expand="block">
+              <span>
+                Equipe
+              </span>
+              <ion-icon name="people-outline"></ion-icon>
+            </ion-button>
+
+          </div>
+
+          <div class="perfil-list-links logout-list">
+            <!--            <h5 class="subtitle">Estabelecimento</h5>-->
+            <ion-button expand="block" routerLink="/login">
+              <span>
+                Sair
+              </span>
+              <ion-icon slot="end"  name="log-out-outline"></ion-icon>
+            </ion-button>
+
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

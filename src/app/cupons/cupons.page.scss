@@ -1,0 +1,100 @@
+.cupom-card{
+  width: 100%;
+  border-radius: 5px;
+  padding: 15px;
+  background-color: #ffffff;
+  box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.29);
+}
+ion-button{
+  --border-radius: 35px;
+  margin-top: 15px;
+  border-radius: 35px;
+  box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.29);
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: normal;
+  color: #333333;
+}
+p{
+  font-size: 12px;
+  font-weight: medium;
+  color: #7c7b7b;
+}
+
+ion-input{
+  border: 1px solid #b3b3b3;
+  border-radius: 5px;
+  margin-top: 10px;
+  padding: 5px 15px!important;
+  font-size: 14px;
+}
+
+
+.title{
+  font-size: 14px;
+  color: #333333;
+}
+
+.cupom-list{
+  ion-card{
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+  .cupom-item{
+    border-radius: 5px;
+    min-height: 80px;
+    margin-bottom:  15px;
+    box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.29);
+
+    ion-thumbnail{
+      float: left;
+      height: 80px;
+      width: 120px;
+      img{
+        border-radius: 5px 0px 0px 5px;
+      }
+    }
+    p{
+      font-size: 12px;
+      margin: 0px;
+
+    }
+    .content{
+      margin-left: 120px;
+      padding: 10px;
+      .title{
+        font-size: 14px;
+        float: left;
+        color: #333333;
+        margin-botton: 8px;
+      }
+      .cupomLink{
+        position: absolute;
+        right: 15px;
+        font-size: 12px;
+        color: #bea063;
+      }
+      .description{
+        float: left;
+        color: #bcbcbc;
+        font-size: 11px;
+        margin-top: 10px;
+      }
+      span{
+        width: 12px;
+        height: 12px;
+        border-radius: 10px;
+        margin-right: 5px;
+        margin-top: 5px;
+      }
+      .tags{
+        margin-top: 5px;
+      }
+      .ativo{
+        background-color: green;
+      }
+      .desativado{
+        background-color: darkred;
+      }
+    }
+  }
+}
