@@ -24,6 +24,10 @@ const routes: Routes = [
         loadChildren: () => import('../perfil-estabelecimento/perfil-estabelecimento.module').then( m => m.PerfilEstabelecimentoPageModule)
       },
       {
+        path: 'equipe',
+        loadChildren: () => import('../equipe/equipe.module').then( m => m.EquipePageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/home',
         pathMatch: 'full'

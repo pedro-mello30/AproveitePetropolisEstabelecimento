@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>adicionar</ion-title>
+    <ion-back-button slot="start"></ion-back-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <div class="adicionar-card">
+          <p>Cupom</p>
+          <ion-toggle checked slot="end"></ion-toggle>
+          <ion-thumbnail slot="start" [routerLink]="['feed/:idCategoria']">
+            <img src="assets/Untitled.png">
+          </ion-thumbnail>
+          <form class="form-edit">
+            <ion-input type="email" placeholder="Nome"></ion-input>
+            <ion-textarea rows="6" placeholder="Descrição"></ion-textarea>
+          </form>
+          <ion-col size="8" offset="2">
+            <ion-button expand="block">
+              Adicionar
+            </ion-button>
+          </ion-col>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

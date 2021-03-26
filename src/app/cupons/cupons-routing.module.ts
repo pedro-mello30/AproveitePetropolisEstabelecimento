@@ -7,6 +7,14 @@ const routes: Routes = [
   {
     path: '',
     component: CuponsPage
+  },
+  {
+    path: 'adicionar',
+    loadChildren: () => import('./adicionar/adicionar.module').then( m => m.AdicionarPageModule)
+  },
+  {
+    path: 'gerenciar',
+    loadChildren: () => import('./gerenciar/gerenciar.module').then( m => m.GerenciarPageModule)
   }
 ];
 
