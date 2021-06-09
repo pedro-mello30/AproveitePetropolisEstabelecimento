@@ -6,5 +6,33 @@
 </ion-header>
 
 <ion-content>
+  <ion-grid>
+    <div class="equipe-card">
+      <ion-row>
+        <ion-col>
+            <p>Adicionar Membro</p>
+            <form class="form-edit">
+              <ion-input type="email" placeholder="E-mail"></ion-input>
+            </form>
+            <ion-col size="8" offset="2">
+              <ion-button expand="block">
+                Adicionar Membro
+              </ion-button>
+            </ion-col>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-list>
+            <ion-list-header>Membros</ion-list-header>
+            <ion-item class="ion-no-padding">
+              membro@membro.com
+              <ion-button class="delete-btn" slot="end"><ion-icon name="trash-outline"></ion-icon></ion-button>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </div>
 
+  </ion-grid>
 </ion-content>
