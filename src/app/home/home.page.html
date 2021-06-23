@@ -11,7 +11,7 @@
       <ion-col>
         <div class="visitas-card">
           <p>Visitas na Página</p>
-          <p class="numero">77 <span>Visitas</span></p>
+          <p class="numero" *ngIf="estabelecimento">{{estabelecimento.visitas}} <span>Visitas</span></p>
         </div>
       </ion-col>
     </ion-row>

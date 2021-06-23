@@ -42,3 +42,8 @@ ion-input, ion-textarea{
   font-size: 14px;
 }
 
+
+input[type=file]{
+  display: none;
+}
+

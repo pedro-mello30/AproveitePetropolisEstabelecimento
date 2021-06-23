@@ -28,21 +28,25 @@
       <ion-col>
         <h5 class="title ion-margin-bottom">Cupons</h5>
         <div class="cupom-list">
-          <div class="cupom-item"  >
-            <ion-thumbnail slot="start" [routerLink]="['feed/:idCategoria']">
-              <img src="assets/Untitled.png">
+          <div class="cupom-item" *ngFor="let cupom of cupons">
+            <ion-thumbnail slot="start">
+              <img *ngIf="cupom.imagem" src="{{cupom.imagem}}">
+              <img *ngIf="!cupom.imagem" src="assets/no_image.jpg">
             </ion-thumbnail>
             <div class="content">
               <ion-row>
-                <p class="title">Cupom 10%</p>
+                <p class="title">{{cupom.nome}}</p>
                 <a class="cupomLink ion-float-right" routerLink="/tabs/cupons/gerenciar">Gerenciar</a>
               </ion-row>
               <ion-row>
-                <span class="ativo"></span>
-                <p class="tags">Ativo</p>
+                <span *ngIf="cupom.status" class="ativo"></span>
+                <p *ngIf="cupom.status" class="tags">Ativo</p>
+
+                <span *ngIf="cupom.status == 0" class="desativado"></span>
+                <p *ngIf="cupom.status == 0" class="tags">Desativado</p>
               </ion-row>
               <ion-row>
-                <p class="description">Lorem ipsum dolor sit amet, consectetur</p>
+                <p class="description">{{cupom.descricao}}</p>
               </ion-row>
             </div>
           </div>

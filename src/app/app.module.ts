@@ -7,6 +7,11 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {NgxViacepModule} from '@brunoc/ngx-viacep';
+import {AngularFireDatabaseModule} from '@angular/fire/database';
+import {AngularFireStorageModule} from '@angular/fire/storage';
+import {AngularFireAuthModule} from '@angular/fire/auth';
+import {AngularFireModule} from '@angular/fire';
+import {environment} from '../environments/environment.prod';
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,6 +21,10 @@ import {NgxViacepModule} from '@brunoc/ngx-viacep';
     IonicModule.forRoot(),
     AppRoutingModule,
     NgxViacepModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule,
+    AngularFireDatabaseModule,
+    AngularFireStorageModule,
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

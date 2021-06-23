@@ -288,7 +288,7 @@ export class CadastroPage implements OnInit {
     this.fileLogoPath = '';
   }
 
-  
+
   // setCategoriaNome(categoriaKey: string){
   //   const categ = this.categoriaService.getByKey(categoriaKey).subscribe((categoria: any) => {
   //     categ.unsubscribe();
@@ -323,7 +323,7 @@ export class CadastroPage implements OnInit {
   // }
   //
   addEndereco(){
-    // this.enderecos = this.formEstabelecimento.get('enderecos') as FormArray;
+    // this .enderecos = this.formEstabelecimento.get('enderecos') as FormArray;
     this.enderecos.push(this.criarFormularioEndereco());
   }
 
