@@ -1,7 +1,10 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>adicionar</ion-title>
     <ion-back-button slot="start"></ion-back-button>
+    <ion-title>{{title}}</ion-title>
+    <ion-buttons *ngIf="key" class="menu-button"  slot="end">
+      <ion-icon name="ellipsis-vertical-sharp"></ion-icon>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -13,11 +16,16 @@
           <p>Cupom</p>
           <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-edit">
 <!--            <ion-toggle [checked]="status" (ionChange)="toggleChange($event)" slot="end"></ion-toggle>-->
-            <ion-thumbnail slot="start" (click)="imagemInput.click()">
-              <img *ngIf="imagemUrl ==''" src="assets/insert_image.png">
-              <img *ngIf="imagemUrl !=''" [src]="imagemUrl">
+            <ion-thumbnail slot="start" *ngIf="imagemUrl ==''" (click)="imagemInput.click()">
+              <img src="assets/insert_image.png">
+              <input type="file" #imagemInput formControlName="imagem" (change)="uploadImagem($event)">
             </ion-thumbnail>
-            <input type="file" #imagemInput formControlName="imagem" (change)="uploadImagem($event)">
+
+            <ion-thumbnail slot="start" *ngIf="imagemUrl !=''">
+              <img [src]="imagemUrl">
+            </ion-thumbnail>
+
+
 
             <ion-item>
               <ion-label>Ativo</ion-label>
@@ -30,7 +38,7 @@
 
             <ion-col size="8" offset="2">
               <ion-button type="submit" expand="block">
-                Adicionar
+                Salvar
               </ion-button>
             </ion-col>
           </form>

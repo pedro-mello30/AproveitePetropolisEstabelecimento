@@ -1,0 +1,40 @@
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" offset="3">
+        <img class="logo" src="assets/LogoAproveitePetropolis.PNG">
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12">
+        <p class="title">Cadastre-se</p>
+        <form class="form-login" [formGroup]="formCriarConta"  (ngSubmit)="onSubmit()">
+          <ion-input type="text" formControlName="nome" placeholder="Nome"></ion-input>
+          <ion-input type="email" formControlName="email" placeholder="E-mail"></ion-input>
+          <ion-input type="text" formControlName="telefone" placeholder="Telefone"></ion-input>
+          <ion-input type="password" formControlName="senha" placeholder="Senha"></ion-input>
+
+          <ion-col size="10" offset="1" class="ion-justify-content-center ion-align-items-center ion-align-self-center">
+            <ion-button expand="block" (click)="onSubmit()">
+              Cadastrar
+            </ion-button>
+            <a class="button-cadastro" routerLink="/login">Login</a>
+          </ion-col>
+        </form>
+      </ion-col>
+
+    </ion-row>
+
+<!--    <ion-row>-->
+<!--      <ion-col>-->
+<!--        <p class="title-social">Cadastre-se com</p>-->
+<!--        <div class="icon-box">-->
+<!--          <img class="icon-face" src="assets/icon/facebook.svg">-->
+<!--          <img class="icon-gmail" src="assets/icon/facebook.svg">-->
+<!--        </div>-->
+<!--      </ion-col>-->
+<!--    </ion-row>-->
+  </ion-grid>
+
+</ion-content>

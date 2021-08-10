@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ToastService} from '../../core/services/toast.service';
 import {CupomService} from '../shared/cupons.service';
+import {EstabelecimentoService} from '../../estabelecimento/shared/estabelecimento.service';
 
 @Component({
   selector: 'app-adicionar',
@@ -11,13 +12,17 @@ import {CupomService} from '../shared/cupons.service';
 })
 export class AdicionarPage implements OnInit {
 
+  title: string = "Adicionar";
   form: FormGroup;
   key: string;
   private file: File = null;
   imagemUrl: string = '';
   filePath: string = '';
 
+  estabelecimentoKey: string;
+
   constructor(
+    private estabelecimentoService: EstabelecimentoService,
     private cuponsService: CupomService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -25,15 +30,36 @@ export class AdicionarPage implements OnInit {
     private toast: ToastService
   ) { }
 
+
   ngOnInit() {
+    this.estabelecimentoKey = this.estabelecimentoService.getEstalebelicimentoKey();
     this.criarFormulario();
+    const key = this.route.snapshot.paramMap.get('key');
+
+    if (key){
+      this.title = "Gerenciar";
+      const subscribe = this.cuponsService.getByKey(key).subscribe((cupom : any) => {
+        subscribe.unsubscribe();
+
+        this.key = cupom.key;
+        this.form.patchValue({
+          nome: cupom.nome,
+          descricao: cupom.descricao,
+          status: cupom.status,
+          imagem: cupom.imagem
+        });
+
+        this.imagemUrl = cupom.imagem || '';
+        this.filePath = cupom.filePath || '';
+      });
+    }
   }
 
   criarFormulario(){
     this.form = this.formBuilder.group({
       nome: ['', Validators.required],
       descricao: [''],
-      status: [''],
+      status: [true],
       imagem: [''],
     });
 
@@ -75,10 +101,10 @@ export class AdicionarPage implements OnInit {
       let result: Promise<{}>;
 
       const cupom = this.form.value;
-      cupom.estabelecimentoKey = '-MafQrPR4t4_2Ccq_KCw';
+      cupom.estabelecimentoKey = this.estabelecimentoKey;
 
       if (this.key) {
-        result = this.cuponsService.update(cupom, this.key);
+        result = this.cuponsService.update(this.key, cupom);
       } else {
         result = this.cuponsService.insert(cupom);
       }
@@ -91,7 +117,7 @@ export class AdicionarPage implements OnInit {
       } else {
         this.criarFormulario();
       }
-      this.toast.showSuccess('Cupom inserido com sucesso');
+      this.toast.showSuccess('Cupom salvo com sucesso');
       this.router.navigate(['/tabs/cupons']);
     }
   }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {EstabelecimentoService} from '../estabelecimento/shared/estabelecimento.service';
 import {Observable} from 'rxjs';
+import {UsuarioAuthService} from '../login/shared/usuario-auth.service';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +13,7 @@ export class HomePage implements OnInit {
   estabelecimento: any;
 
   constructor(
-    private estabelecimentoService: EstabelecimentoService
+    private estabelecimentoService: EstabelecimentoService,
   ) { }
 
   ngOnInit() {
@@ -20,7 +21,7 @@ export class HomePage implements OnInit {
   }
 
   async carregarDados(){
-    const key = '-MafQrPR4t4_2Ccq_KCw';
+    const key = this.estabelecimentoService.getEstalebelicimentoKey();
     const estabelecimentoSub = await this.estabelecimentoService.getByKey(key).subscribe((estabelecimento) => {
       estabelecimentoSub.unsubscribe();
       this.estabelecimento = estabelecimento;

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {AngularFireDatabase, AngularFireList} from "@angular/fire/database";
 import {AngularFireStorage} from "@angular/fire/storage";
 import {FirebasePath} from "../../core/shared/firebase-path";
-import {finalize, map} from 'rxjs/operators';
+import {filter, finalize, map, take, tap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -78,5 +78,37 @@ export class CupomService {
     if (atualizarCupom){
       this.cuponsRef.update(key, {imagem: '', filePath: '' });
     }
+  }
+
+  getGeneratedByToken(estabelecimentoKey, token){
+    // const path = `${FirebasePath.CUPONS_GERADOS}${estabelecimentoKey}`;
+    const path = `${FirebasePath.CUPONS_GERADOS}`;
+    const cuponsRef = this.db.list(path, query => query
+      .orderByChild('token')
+      .equalTo(token)
+      .limitToFirst(1));
+
+    return cuponsRef.snapshotChanges().pipe(
+      map(changes => {
+        return changes.map(m => ({ key: m.payload.key, ...m.payload.val() as {} }));
+      })
+    );
+  }
+
+  validateCupom(estabelecimentoKey: string, token: string): any{
+    // const path = `${FirebasePath.CUPONS_GERADOS}${estabelecimentoKey}`;
+    const path = `${FirebasePath.CUPONS_GERADOS}`;
+
+    const cuponsGRef = this.db.list(path);
+
+    const sub = this.getGeneratedByToken(estabelecimentoKey, token).subscribe((cupom: any) => {
+      sub.unsubscribe();
+      const cupomUp = {status: true, token: ""};
+      return new Promise((resolve, reject) => {
+        cuponsGRef.update(cupom[0].key, cupomUp)
+          .then(() => resolve(cupom[0].key))
+          .catch(() => reject());
+      });
+    });
   }
 }

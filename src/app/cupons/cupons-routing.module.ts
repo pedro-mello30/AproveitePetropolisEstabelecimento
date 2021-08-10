@@ -13,6 +13,10 @@ const routes: Routes = [
     loadChildren: () => import('./adicionar/adicionar.module').then( m => m.AdicionarPageModule)
   },
   {
+    path: 'adicionar/:key',
+    loadChildren: () => import('./adicionar/adicionar.module').then( m => m.AdicionarPageModule)
+  },
+  {
     path: 'gerenciar',
     loadChildren: () => import('./gerenciar/gerenciar.module').then( m => m.GerenciarPageModule)
   }

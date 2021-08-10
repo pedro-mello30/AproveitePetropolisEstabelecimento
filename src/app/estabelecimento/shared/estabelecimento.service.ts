@@ -22,4 +22,16 @@ export class EstabelecimentoService {
       })
     );
   }
+
+  setEstalebelicimentoKey(token: string){
+    localStorage.setItem('estabelecimentoKey', token);
+  }
+
+  removeEstalebelicimentoKey(){
+    localStorage.removeItem('estabelecimentoKey');
+  }
+
+  getEstalebelicimentoKey(){
+    return localStorage.getItem('estabelecimentoKey');
+  }
 }

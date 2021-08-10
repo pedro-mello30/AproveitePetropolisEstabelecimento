@@ -13,14 +13,14 @@
       <ion-col>
         <div class="cupom-card">
           <p>Validar Cupom</p>
-          <form class="form-edit">
-            <ion-input type="email" placeholder="Código"></ion-input>
+          <form [formGroup]="form" class="form-edit" (ngSubmit)="onSubmit()">
+            <ion-input type="text" formControlName="token" placeholder="Código"></ion-input>
+            <ion-col size="8" offset="2">
+              <ion-button type="submit" expand="block">
+                Validar
+              </ion-button>
+            </ion-col>
           </form>
-          <ion-col size="8" offset="2">
-            <ion-button expand="block">
-              Validar
-            </ion-button>
-          </ion-col>
         </div>
       </ion-col>
     </ion-row>
@@ -36,7 +36,7 @@
             <div class="content">
               <ion-row>
                 <p class="title">{{cupom.nome}}</p>
-                <a class="cupomLink ion-float-right" routerLink="/tabs/cupons/gerenciar">Gerenciar</a>
+                <a class="cupomLink ion-float-right" [routerLink]="['adicionar', cupom.key]">Gerenciar</a>
               </ion-row>
               <ion-row>
                 <span *ngIf="cupom.status" class="ativo"></span>
