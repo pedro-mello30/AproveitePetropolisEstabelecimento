@@ -13,18 +13,15 @@ import {EstabelecimentoService} from '../estabelecimento/shared/estabelecimento.
 export class CuponsPage implements OnInit {
 
   cupons;
-  form: FormGroup;
   estabelecimentoKey: string;
 
   constructor(
     private estabelecimentoService: EstabelecimentoService,
     private cuponsService: CupomService,
-    private formBuilder: FormBuilder,
     private toast: ToastService
   ) { }
 
   ngOnInit() {
-    this.criarFormulario();
     this.estabelecimentoKey = this.estabelecimentoService.getEstalebelicimentoKey();
     const cuponsSub = this.cuponsService.getByField('estabelecimentoKey', this.estabelecimentoKey).subscribe((cupons) => {
       cuponsSub.unsubscribe();
@@ -32,16 +29,5 @@ export class CuponsPage implements OnInit {
     });
   }
 
-  onSubmit(){
-    const update = this.cuponsService.validateCupom(this.estabelecimentoKey, this.form.get('token').value);
-    this.toast.showSuccess("Cupom válidado com sucesso.");
-
-  }
-
-  criarFormulario(){
-    this.form = this.formBuilder.group({
-      token: ['', Validators.required],
-    });
-  }
 
 }

@@ -1,0 +1,365 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-back-button slot="start"></ion-back-button>
+    <ion-title>{{title}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <form [formGroup]="formEstabelecimento" (ngSubmit)="onSubmit()">
+
+          <ion-list>
+            <ion-list-header>Informações do Estabelecimento</ion-list-header>
+            <ion-item *ngIf="logoUrl ==''">
+<!--              <ion-label position="stacked">Foto</ion-label>-->
+              <ion-button color="primary" (click)="logoInput.click()">Adicionar Logo</ion-button>
+              <input type="file" #logoInput formControlName="logo" (change)="uploadLogo($event)">
+            </ion-item>
+
+            <ion-item *ngIf="logoUrl !=''">
+
+              <ion-thumbnail slot="start">
+                <img [src]="logoUrl">
+              </ion-thumbnail>
+              <ion-button color="danger" (click)="removeLogo()">Remover Logo</ion-button>
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="stacked">Nome</ion-label>
+              <ion-input type="text" formControlName="nome"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="stacked">Categoria</ion-label>
+
+              <ion-select placeholder="Escolher" formControlName="categoriaKey" [selectedText]="formEstabelecimento.get('categoriaNome').value" (ionChange)="setCategoriaNome($event.target.value)">
+                <ion-select-option *ngFor="let categoria of categorias | async" value="{{categoria.key}}">{{categoria.nome}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+
+            <ion-item *ngIf="(subcategorias | async)?.length > 0">
+              <ion-label position="stacked">Subcategoria</ion-label>
+
+              <ion-select placeholder="Escolher" formControlName="subcategoriaKey" [selectedText]="formEstabelecimento.get('subcategoriaNome').value" (ionChange)="setSubcategoriaNome($event.target.value)">
+                <ion-select-option *ngFor="let subcategoria of subcategorias | async" value="{{subcategoria.key}}">{{subcategoria.nome}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+
+
+            <ion-item>
+              <ion-label position="stacked">CNPJ</ion-label>
+              <ion-input type="text" formControlName="cnpj" ></ion-input>
+            </ion-item>
+          </ion-list>
+
+<!--          <ion-item>-->
+<!--            <ion-label position="stacked">Proprietários</ion-label>-->
+
+<!--            <ion-select placeholder="Escolher" formControlName="proprietariosUid" multiple="true" (ionChange)="setProprietariosEmail($event.target.value)">-->
+<!--              <ion-select-option *ngFor="let membro of membros | async" value="{{membro.uid}}" >{{membro.email}}</ion-select-option>-->
+<!--            </ion-select>-->
+<!--          </ion-item>-->
+
+
+
+<!--          <div class="enderecos-content">-->
+<!--            <div formArrayName="enderecos" *ngFor="let endereco of formEstabelecimento.get('enderecos')['controls']; let i = index;">-->
+<!--              <ion-list  [formGroupName]="i" >-->
+<!--                <ion-list-header>Endereço {{ i+1 }}</ion-list-header>-->
+<!--&lt;!&ndash;                <ion-button color="danger" (click)="removeEndereco(i)">Remover Endereço</ion-button>&ndash;&gt;-->
+<!--                <ion-item>-->
+<!--                  <ion-label position="stacked">Cep</ion-label>-->
+<!--                  <ion-input type="text" formControlName="cep"></ion-input>-->
+<!--                </ion-item>-->
+
+
+                <ion-list formGroupName="contato">
+                  <ion-list-header>Contato</ion-list-header>
+                  <ion-item>
+                    <ion-label position="stacked">Telefone</ion-label>
+      <!--              <input type="text" formControlName="telefone" mask="(000) 000-0000">-->
+                    <ion-input type="text" formControlName="telefone"></ion-input>
+                  </ion-item>
+
+                  <ion-item>
+                    <ion-label position="stacked">E-mail</ion-label>
+                    <ion-input type="text" formControlName="email"></ion-input>
+                  </ion-item>
+
+                  <ion-item>
+                    <ion-label position="stacked">Site</ion-label>
+                    <ion-input type="text" formControlName="site"></ion-input>
+                  </ion-item>
+
+                  <ion-item>
+                    <ion-label position="stacked">Facebook</ion-label>
+                    <ion-input type="text" formControlName="facebook"></ion-input>
+                  </ion-item>
+
+                  <ion-item>
+                    <ion-label position="stacked">Instagram</ion-label>
+                    <ion-input type="text" formControlName="instagram"></ion-input>
+                  </ion-item>
+                </ion-list>
+<!--              </ion-list>-->
+<!--            </div>-->
+<!--          </div>-->
+
+          <ion-list-header>Endereços</ion-list-header>
+          <ion-button class="btn-add-end ion-margin-start" color="primary" (click)="addEndereco()">Adicionar Endereco</ion-button>
+          <div class="enderecos-content">
+            <div formArrayName="enderecos" *ngFor="let endereco of formEstabelecimento.get('enderecos')['controls']; let i = index;">
+              <ion-list  [formGroupName]="i" >
+                <ion-button *ngIf="i != 0" class="btn-rmv-end" color="danger" (click)="removeEndereco(i)"><ion-icon name="trash-outline"></ion-icon></ion-button>
+                <ion-list-header>Endereço {{ i+1 }}</ion-list-header>
+                <ion-item>
+                  <ion-label position="stacked">Cep</ion-label>
+                  <ion-input type="text" formControlName="cep" (ionBlur)="buscaCEP(i)"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label position="stacked">Estado</ion-label>
+                  <ion-input type="text" formControlName="estado"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label position="stacked">Cidade</ion-label>
+                  <ion-input type="text" formControlName="cidade"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label position="stacked">Rua</ion-label>
+                  <ion-input type="text" formControlName="rua"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label position="stacked">Numero</ion-label>
+                  <ion-input type="text" formControlName="numero"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label position="stacked">Complemento</ion-label>
+                  <ion-input type="text" formControlName="complemento"></ion-input>
+                </ion-item>
+              </ion-list>
+            </div>
+          </div>
+
+
+
+          <ion-list formArrayName="formasPagamento">
+            <ion-list-header>Formas de Pagamento</ion-list-header>
+            <ion-item *ngFor="let forma of formasPagamento.controls; let i = index" formGroupName="{{ i }}">
+              <ion-label>{{ forma.get('nome').value }}</ion-label>
+              <ion-checkbox slot="end" [formControl]="forma.get('isChecked')"></ion-checkbox>
+            </ion-item>
+          </ion-list>
+
+<!--          <ion-list formGroupName="horario">-->
+<!--            <ion-list-header>Horário de funcionamento</ion-list-header>-->
+
+<!--            <ion-item *ngFor="let dia of dias">-->
+<!--              <ion-label>{{dia.nome}}</ion-label>-->
+<!--              <ion-checkbox slot="end" [value]="dia.value" (ionChange)="onCheckHorarioChange($event)"></ion-checkbox>-->
+<!--            </ion-item>-->
+<!--          </ion-list>-->
+
+          <div class="enderecos-content">
+<!--            <div formArrayName="imagens" *ngFor="let imagem of formEstabelecimento.get('imagens')['controls']; let i = index;">-->
+            <div formArrayName="imagens">
+              <ion-list [formGroupName]="0">
+                <ion-list-header>Imagens</ion-list-header>
+
+                <ion-item>
+<!--                <ion-item *ngFor="let imagem of imagens.controls; let i=index">-->
+                  <ion-button color="primary" (click)="imagemInput.click()">Adicionar Imagem</ion-button>
+                  <input type="file" multiple #imagemInput  (change)="uploadImagem($event)">
+                </ion-item>
+              </ion-list>
+            </div>
+
+            <ion-item *ngFor="let file of imagensEstabelecimento; let i = index">
+
+              <ion-thumbnail slot="start">
+                <img [src]="file.imagem">
+              </ion-thumbnail>
+              <ion-button color="danger" (click)="removeImagem(i, file.key)">Remover Imagem</ion-button>
+            </ion-item>
+          </div>
+
+
+
+          <ion-list formGroupName="horario">
+            <ion-list-header>Horário</ion-list-header>
+
+            <div formGroupName="segunda">
+              <p class="sub-title">Segunda-feira</p>
+              <ion-grid>
+                <ion-row>
+                  <ion-col size="3">
+                    <ion-item>
+                      <ion-label position="stacked">Abre às:</ion-label>
+                      <!--              <input type="text" formControlName="telefone" mask="(000) 000-0000">-->
+                      <ion-input type="text" formControlName="de"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size="3">
+                    <ion-item>
+                      <ion-label position="stacked">Fecha às:</ion-label>
+                      <!--              <input type="text" formControlName="telefone" mask="(000) 000-0000">-->
+                      <ion-input type="text" formControlName="as"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </div>
+
+            <div formGroupName="terca">
+              <p class="sub-title">Terça-feira</p>
+              <ion-grid>
+                <ion-row>
+                  <ion-col size="3">
+                    <ion-item>
+                      <ion-label position="stacked">Abre às:</ion-label>
+                      <!--              <input type="text" formControlName="telefone" mask="(000) 000-0000">-->
+                      <ion-input type="text" formControlName="de"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size="3">
+                    <ion-item>
+                      <ion-label position="stacked">Fecha às:</ion-label>
+                      <!--              <input type="text" formControlName="telefone" mask="(000) 000-0000">-->
+                      <ion-input type="text" formControlName="as"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </div>
+
+            <div formGroupName="quarta">
+              <p class="sub-title">Quarta-feira</p>
+              <ion-grid>
+                <ion-row>
+                  <ion-col size="3">
+                    <ion-item>
+                      <ion-label position="stacked">Abre às:</ion-label>
+                      <!--              <input type="text" formControlName="telefone" mask="(000) 000-0000">-->
+                      <ion-input type="text" formControlName="de"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size="3">
+                    <ion-item>
+                      <ion-label position="stacked">Fecha às:</ion-label>
+                      <!--              <input type="text" formControlName="telefone" mask="(000) 000-0000">-->
+                      <ion-input type="text" formControlName="as"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </div>
+
+            <div formGroupName="quinta">
+              <p class="sub-title">Quinta-feira</p>
+              <ion-grid>
+                <ion-row>
+                  <ion-col size="3">
+                    <ion-item>
+                      <ion-label position="stacked">Abre às:</ion-label>
+                      <!--              <input type="text" formControlName="telefone" mask="(000) 000-0000">-->
+                      <ion-input type="text" formControlName="de"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size="3">
+                    <ion-item>
+                      <ion-label position="stacked">Fecha às:</ion-label>
+                      <!--              <input type="text" formControlName="telefone" mask="(000) 000-0000">-->
+                      <ion-input type="text" formControlName="as"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </div>
+
+            <div formGroupName="sexta">
+              <p class="sub-title">Sexta-feira</p>
+              <ion-grid>
+                <ion-row>
+                  <ion-col size="3">
+                    <ion-item>
+                      <ion-label position="stacked">Abre às:</ion-label>
+                      <!--              <input type="text" formControlName="telefone" mask="(000) 000-0000">-->
+                      <ion-input type="text" formControlName="de"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size="3">
+                    <ion-item>
+                      <ion-label position="stacked">Fecha às:</ion-label>
+                      <!--              <input type="text" formControlName="telefone" mask="(000) 000-0000">-->
+                      <ion-input type="text" formControlName="as"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </div>
+
+            <div formGroupName="sabado">
+              <p class="sub-title">Sábado</p>
+              <ion-grid>
+                <ion-row>
+                  <ion-col size="3">
+                    <ion-item>
+                      <ion-label position="stacked">Abre às:</ion-label>
+                      <!--              <input type="text" formControlName="telefone" mask="(000) 000-0000">-->
+                      <ion-input type="text" formControlName="de"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size="3">
+                    <ion-item>
+                      <ion-label position="stacked">Fecha às:</ion-label>
+                      <!--              <input type="text" formControlName="telefone" mask="(000) 000-0000">-->
+                      <ion-input type="text" formControlName="as"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </div>
+
+            <div formGroupName="domingo">
+              <p class="sub-title">Domingo</p>
+              <ion-grid>
+                <ion-row>
+                  <ion-col size="3">
+                    <ion-item>
+                      <ion-label position="stacked">Abre às:</ion-label>
+                      <!--              <input type="text" formControlName="telefone" mask="(000) 000-0000">-->
+                      <ion-input type="text" formControlName="de"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size="3">
+                    <ion-item>
+                      <ion-label position="stacked">Fecha às:</ion-label>
+                      <!--              <input type="text" formControlName="telefone" mask="(000) 000-0000">-->
+                      <ion-input type="text" formControlName="as"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </div>
+
+
+
+
+          </ion-list>
+
+
+          <div margin-vertical>
+            <ion-button color="primary" expand="block" type="submit" [disabled]="formEstabelecimento.invalid">Salvar</ion-button>
+          </div>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

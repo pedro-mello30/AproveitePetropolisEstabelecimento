@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>estabelecimentos</ion-title>
+    <ion-buttons class="adicionar-button" routerLink="/tabs/cupons/adicionar" slot="end">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-item *ngFor="let estabelecimento of estabelecimentos | async">
+          <ion-thumbnail slot="start">
+            <img *ngIf="estabelecimento.logo" src="{{estabelecimento.logo}}">
+            <img *ngIf="!estabelecimento.logo" src="assets/no_image.jpg">
+          </ion-thumbnail>
+          <ion-label>
+            <h2>{{estabelecimento.nome}}</h2>
+            <h3>{{ estabelecimento.categoriaNome }} - {{ estabelecimento.subcategoriaNome }}</h3>
+          </ion-label>
+          <ion-button slot="end" color="primary" (click)="gerenciarEstabelecimento(estabelecimento.key)">
+            <ion-icon name="analytics-outline"></ion-icon>
+             Gerenciar
+          </ion-button>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

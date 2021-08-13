@@ -56,3 +56,17 @@
   margin-top: 80px;
 }
 
+
+input[type=file]{
+  display: none;
+}
+
+ion-button{
+  --box-shadow: none;
+}
+
+.md ion-button{
+  --background-activated: #d6b46a;
+}
+
+

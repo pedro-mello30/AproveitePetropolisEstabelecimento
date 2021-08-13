@@ -24,6 +24,10 @@ const routes: Routes = [
         loadChildren: () => import('../perfil-estabelecimento/perfil-estabelecimento.module').then( m => m.PerfilEstabelecimentoPageModule)
       },
       {
+        path: 'estabelecimento/editar/:key',
+        loadChildren: () => import('../estabelecimento/estabelecimentos-form/estabelecimentos-form.module').then( m => m.EstabelecimentosFormPageModule)
+      },
+      {
         path: 'equipe',
         loadChildren: () => import('../equipe/equipe.module').then( m => m.EquipePageModule)
       },

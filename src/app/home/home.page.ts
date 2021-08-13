@@ -18,6 +18,7 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     this.carregarDados();
+    this.load();
   }
 
   async carregarDados(){
@@ -26,6 +27,12 @@ export class HomePage implements OnInit {
       estabelecimentoSub.unsubscribe();
       this.estabelecimento = estabelecimento;
     });
+  }
+
+  load() {
+    //Session storage salva os dados como string
+    (sessionStorage.refresh == 'true' || !sessionStorage.refresh) && location.reload();
+    sessionStorage.refresh = false;
   }
 
 }

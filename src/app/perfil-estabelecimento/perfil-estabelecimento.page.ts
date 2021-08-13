@@ -9,12 +9,38 @@ import {Router} from '@angular/router';
 })
 export class PerfilEstabelecimentoPage implements OnInit {
 
+  usuario;
+
+
   constructor(
     private usuarioAuthService: UsuarioAuthService,
     private router: Router
-  ) { }
+  )
+  { }
 
   ngOnInit() {
+    this.usuario = this.usuarioAuthService.getUser();
+    console.log(this.usuario);
+  }
+
+  uploadImg(event: any){
+    if (event.target.files.length) {
+      this.usuarioAuthService.uploadImg(event.target.files[0])
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.usuario.photoUrl = reader.result.toString();
+      };
+      reader.readAsDataURL(event.target.files[0]);
+    }
+  }
+
+  doRefresh(event) {
+    location.reload();
+    // this.ngOnInit();
+    // setTimeout(() => {
+    //   // console.log('Async operation has ended');
+    //   event.target.complete();
+    // }, 2000);
   }
 
   logout(){

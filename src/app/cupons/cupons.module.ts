@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { CuponsPageRoutingModule } from './cupons-routing.module';
 
 import { CuponsPage } from './cupons.page';
+import {ValidacaoCupomComponent} from './validacao-cupom/validacao-cupom.component';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { CuponsPage } from './cupons.page';
     CuponsPageRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [CuponsPage]
+  declarations: [CuponsPage, ValidacaoCupomComponent],
+  exports: [ValidacaoCupomComponent]
 })
 export class CuponsPageModule {}

@@ -1,0 +1,11 @@
+<div class="cupom-card">
+  <p>Validar Cupom</p>
+  <form [formGroup]="form" class="form-edit" (ngSubmit)="onSubmit()">
+    <ion-input type="text" formControlName="token" placeholder="Código"></ion-input>
+    <ion-col size="8" offset="2">
+      <ion-button type="submit" expand="block">
+        Validar
+      </ion-button>
+    </ion-col>
+  </form>
+</div>

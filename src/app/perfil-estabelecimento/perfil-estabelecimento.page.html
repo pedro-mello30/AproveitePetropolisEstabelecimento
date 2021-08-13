@@ -5,17 +5,21 @@
 </ion-header>
 
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-grid>
     <ion-row>
       <ion-col>
         <div class="perfil-card">
           <div class="perfil-avatar">
-            <ion-avatar>
-              <img src="assets/Untitled.png">
+            <ion-avatar (click)="imagemInput.click()">
+              <img *ngIf="usuario.photoUrl" src="{{usuario.photoUrl}}">
+              <img *ngIf="!usuario.photoUrl" src="assets/no_profile.png">
             </ion-avatar>
-            <p class="ion-no-margin">Fulano da Jabulani</p>
+            <input type="file" #imagemInput (change)="uploadImg($event)">
+            <p class="ion-no-margin">{{usuario.name}}</p>
           </div>
-
 
           <div class="perfil-list-links">
             <h5 class="subtitle">Configurações da conta</h5>
@@ -31,28 +35,29 @@
               </span>
               <ion-icon slot="end"  name="lock-closed-outline"></ion-icon>
             </ion-button>
-            <ion-button expand="block">
-              <span>
-                Navegar
-              </span>
-              <ion-icon name="grid-outline"></ion-icon>
-            </ion-button>
           </div>
 
           <div class="perfil-list-links estabelecimento-list">
             <h5 class="subtitle">Estabelecimento</h5>
-            <ion-button expand="block" routerLink="/cadastro">
+            <ion-button expand="block" [routerLink]="['/tabs/estabelecimento/editar/', '-MafQrPR4t4_2Ccq_KCw']">
               <span>
                 Informações do Estabelecimento
               </span>
               <ion-icon slot="end"  name="storefront-outline"></ion-icon>
             </ion-button>
-            <ion-button expand="block" routerLink="/tabs/equipe">
+<!--            <ion-button expand="block" routerLink="/tabs/equipe">-->
+<!--              <span>-->
+<!--                Equipe-->
+<!--              </span>-->
+<!--              <ion-icon name="people-outline"></ion-icon>-->
+<!--            </ion-button>-->
+            <ion-button expand="block" routerLink="/estabelecimento">
               <span>
-                Equipe
+                Meus Estabelecimentos
               </span>
-              <ion-icon name="people-outline"></ion-icon>
+              <ion-icon name="grid-outline"></ion-icon>
             </ion-button>
+
 
           </div>
 
