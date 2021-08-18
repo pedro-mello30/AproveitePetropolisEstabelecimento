@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UsuarioAuthService} from '../login/shared/usuario-auth.service';
 import {Router} from '@angular/router';
+import {EstabelecimentoService} from '../estabelecimento/shared/estabelecimento.service';
 
 @Component({
   selector: 'app-perfil-estabelecimento',
@@ -10,16 +11,18 @@ import {Router} from '@angular/router';
 export class PerfilEstabelecimentoPage implements OnInit {
 
   usuario;
-
+  estabelecimentoKey;
 
   constructor(
     private usuarioAuthService: UsuarioAuthService,
+    private estabelecimentoService: EstabelecimentoService,
     private router: Router
   )
   { }
 
   ngOnInit() {
     this.usuario = this.usuarioAuthService.getUser();
+    this.estabelecimentoKey = this.estabelecimentoService.getEstalebelicimentoKey();
     console.log(this.usuario);
   }
 
@@ -41,6 +44,11 @@ export class PerfilEstabelecimentoPage implements OnInit {
     //   // console.log('Async operation has ended');
     //   event.target.complete();
     // }, 2000);
+  }
+
+  redirectMeusEstab(){
+    this.estabelecimentoService.setEstalebelicimentoKey('');
+    this.router.navigate(['/estabelecimento']);
   }
 
   logout(){

@@ -40,8 +40,7 @@ export class LoginPage implements OnInit {
     if (this.formLogin.valid){
       this.usuarioService.login(this.formLogin.value.email, this.formLogin.value.senha)
         .then(() => {
-          this.estabelecimentoService.setEstalebelicimentoKey('-MafQrPR4t4_2Ccq_KCw');
-          this.router.navigate(['/tabs/home']);
+          this.router.navigate(['/estabelecimento']);
         })
         .catch((mensagem: string) => {
           this.toast.showError(mensagem);
