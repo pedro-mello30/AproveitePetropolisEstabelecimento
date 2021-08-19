@@ -35,4 +35,13 @@ export class HomePage implements OnInit {
     sessionStorage.refresh = false;
   }
 
+  doRefresh(event) {
+    location.reload();
+    // this.ngOnInit();
+    // setTimeout(() => {
+    //   // console.log('Async operation has ended');
+    //   event.target.complete();
+    // }, 2000);
+  }
+
 }

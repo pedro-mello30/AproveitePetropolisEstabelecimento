@@ -7,7 +7,11 @@ const routes: Routes = [
   {
     path: '',
     component: EstabelecimentoPage
-  }
+  },
+  {
+    path: 'adicionar',
+    loadChildren: () => import('./estabelecimentos-form/estabelecimentos-form.module').then( m => m.EstabelecimentosFormPageModule)
+  },
 ];
 
 @NgModule({

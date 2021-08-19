@@ -56,31 +56,6 @@ const openURL = async (url, ev, direction, animation) => {
 
 /***/ }),
 
-/***/ "Fpbh":
-/*!**********************************************!*\
-  !*** ./src/app/core/shared/firebase-path.ts ***!
-  \**********************************************/
-/*! exports provided: FirebasePath */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FirebasePath", function() { return FirebasePath; });
-class FirebasePath {
-}
-FirebasePath.CATEGORIAS = 'categorias/';
-FirebasePath.SUBCATEGORIAS = 'subcategorias/';
-FirebasePath.USUARIOS = 'usuarios/';
-FirebasePath.ESTABELECIMENTOS = 'estabelecimentos/';
-FirebasePath.ESTABELECIMENTOS_IMAGENS = 'estabelecimentos_imagens/';
-FirebasePath.ESTABELECIMENTOS_ENDERECOS = 'estabelecimentos_enderecos/';
-FirebasePath.ESTABELECIMENTOS_CONTATOS = 'estabelecimentos_contatos/';
-FirebasePath.CUPONS = 'cupons/';
-FirebasePath.CUPONS_GERADOS = 'cupons_gerados/';
-
-
-/***/ }),
-
 /***/ "JbSX":
 /*!*********************************************************************!*\
   !*** ./node_modules/@ionic/core/dist/esm/button-active-4927a4c1.js ***!

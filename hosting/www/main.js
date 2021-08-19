@@ -49,6 +49,53 @@ const environment = {
 
 /***/ }),
 
+/***/ "LZC5":
+/*!********************************************!*\
+  !*** ./src/app/login/shared/auth.guard.ts ***!
+  \********************************************/
+/*! exports provided: AuthGuard */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthGuard", function() { return AuthGuard; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "tyNb");
+/* harmony import */ var _angular_fire_auth__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/fire/auth */ "UbJi");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "kU1M");
+
+
+
+
+
+let AuthGuard = class AuthGuard {
+    constructor(router, afAuth) {
+        this.router = router;
+        this.afAuth = afAuth;
+    }
+    canActivate(next, state) {
+        return this.afAuth.user.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["take"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(user => !!user), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(usuarioLogado => {
+            if (!usuarioLogado) {
+                this.router.navigate(['/login']);
+            }
+        }));
+    }
+};
+AuthGuard.ctorParameters = () => [
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] },
+    { type: _angular_fire_auth__WEBPACK_IMPORTED_MODULE_3__["AngularFireAuth"] }
+];
+AuthGuard = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root'
+    })
+], AuthGuard);
+
+
+
+/***/ }),
+
 /***/ "Sy1n":
 /*!**********************************!*\
   !*** ./src/app/app.component.ts ***!
@@ -434,17 +481,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "tyNb");
+/* harmony import */ var _login_shared_auth_guard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./login/shared/auth.guard */ "LZC5");
+
 
 
 
 const routes = [
     {
         path: '',
+        canActivate: [_login_shared_auth_guard__WEBPACK_IMPORTED_MODULE_3__["AuthGuard"]],
         loadChildren: () => __webpack_require__.e(/*! import() | tabs-tabs-module */ "tabs-tabs-module").then(__webpack_require__.bind(null, /*! ./tabs/tabs.module */ "hO9l")).then(m => m.TabsPageModule)
     },
     {
+        path: 'login',
+        loadChildren: () => Promise.all(/*! import() | login-login-module */[__webpack_require__.e("default~cadastro-cadastro-module~cupons-cupons-module~estabelecimento-estabelecimento-module~estabel~506a5e45"), __webpack_require__.e("default~cadastro-cadastro-module~cupons-cupons-module~estabelecimento-estabelecimento-module~estabel~866534b6"), __webpack_require__.e("login-login-module")]).then(__webpack_require__.bind(null, /*! ./login/login.module */ "X3zk")).then(m => m.LoginPageModule)
+    },
+    {
         path: 'cadastro',
-        loadChildren: () => __webpack_require__.e(/*! import() | cadastro-cadastro-module */ "cadastro-cadastro-module").then(__webpack_require__.bind(null, /*! ./cadastro/cadastro.module */ "2xf1")).then(m => m.CadastroPageModule)
+        loadChildren: () => Promise.all(/*! import() | cadastro-cadastro-module */[__webpack_require__.e("default~cadastro-cadastro-module~cupons-cupons-module~estabelecimento-estabelecimento-module~estabel~506a5e45"), __webpack_require__.e("default~cadastro-cadastro-module~cupons-cupons-module~estabelecimento-estabelecimento-module~estabel~866534b6"), __webpack_require__.e("cadastro-cadastro-module")]).then(__webpack_require__.bind(null, /*! ./cadastro/cadastro.module */ "2xf1")).then(m => m.CadastroPageModule)
+    },
+    {
+        path: 'estabelecimento',
+        canActivate: [_login_shared_auth_guard__WEBPACK_IMPORTED_MODULE_3__["AuthGuard"]],
+        loadChildren: () => Promise.all(/*! import() | estabelecimento-estabelecimento-module */[__webpack_require__.e("default~cadastro-cadastro-module~cupons-cupons-module~estabelecimento-estabelecimento-module~estabel~506a5e45"), __webpack_require__.e("default~cadastro-cadastro-module~cupons-cupons-module~estabelecimento-estabelecimento-module~estabel~866534b6"), __webpack_require__.e("estabelecimento-estabelecimento-module")]).then(__webpack_require__.bind(null, /*! ./estabelecimento/estabelecimento.module */ "Xr8j")).then(m => m.EstabelecimentoPageModule)
     }
 ];
 let AppRoutingModule = class AppRoutingModule {

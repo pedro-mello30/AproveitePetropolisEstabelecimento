@@ -127,19 +127,23 @@ const routes = [
         children: [
             {
                 path: 'home',
-                loadChildren: () => Promise.all(/*! import() | home-home-module */[__webpack_require__.e("common"), __webpack_require__.e("home-home-module")]).then(__webpack_require__.bind(null, /*! ../home/home.module */ "ct+p")).then(m => m.HomePageModule)
+                loadChildren: () => Promise.all(/*! import() | home-home-module */[__webpack_require__.e("default~cadastro-cadastro-module~cupons-cupons-module~estabelecimento-estabelecimento-module~estabel~506a5e45"), __webpack_require__.e("default~cadastro-cadastro-module~cupons-cupons-module~estabelecimento-estabelecimento-module~estabel~866534b6"), __webpack_require__.e("default~cupons-cupons-module~home-home-module"), __webpack_require__.e("home-home-module")]).then(__webpack_require__.bind(null, /*! ../home/home.module */ "ct+p")).then(m => m.HomePageModule)
             },
             {
                 path: 'home',
-                loadChildren: () => Promise.all(/*! import() | home-home-module */[__webpack_require__.e("common"), __webpack_require__.e("home-home-module")]).then(__webpack_require__.bind(null, /*! ../home/home.module */ "ct+p")).then(m => m.HomePageModule)
+                loadChildren: () => Promise.all(/*! import() | home-home-module */[__webpack_require__.e("default~cadastro-cadastro-module~cupons-cupons-module~estabelecimento-estabelecimento-module~estabel~506a5e45"), __webpack_require__.e("default~cadastro-cadastro-module~cupons-cupons-module~estabelecimento-estabelecimento-module~estabel~866534b6"), __webpack_require__.e("default~cupons-cupons-module~home-home-module"), __webpack_require__.e("home-home-module")]).then(__webpack_require__.bind(null, /*! ../home/home.module */ "ct+p")).then(m => m.HomePageModule)
             },
             {
                 path: 'cupons',
-                loadChildren: () => Promise.all(/*! import() | cupons-cupons-module */[__webpack_require__.e("common"), __webpack_require__.e("cupons-cupons-module")]).then(__webpack_require__.bind(null, /*! ../cupons/cupons.module */ "iEC3")).then(m => m.CuponsPageModule)
+                loadChildren: () => Promise.all(/*! import() | cupons-cupons-module */[__webpack_require__.e("default~cadastro-cadastro-module~cupons-cupons-module~estabelecimento-estabelecimento-module~estabel~506a5e45"), __webpack_require__.e("default~cadastro-cadastro-module~cupons-cupons-module~estabelecimento-estabelecimento-module~estabel~866534b6"), __webpack_require__.e("default~cupons-cupons-module~home-home-module")]).then(__webpack_require__.bind(null, /*! ../cupons/cupons.module */ "iEC3")).then(m => m.CuponsPageModule)
             },
             {
                 path: 'perfil-estabelecimento',
-                loadChildren: () => __webpack_require__.e(/*! import() | perfil-estabelecimento-perfil-estabelecimento-module */ "perfil-estabelecimento-perfil-estabelecimento-module").then(__webpack_require__.bind(null, /*! ../perfil-estabelecimento/perfil-estabelecimento.module */ "8Qjl")).then(m => m.PerfilEstabelecimentoPageModule)
+                loadChildren: () => Promise.all(/*! import() | perfil-estabelecimento-perfil-estabelecimento-module */[__webpack_require__.e("default~cadastro-cadastro-module~cupons-cupons-module~estabelecimento-estabelecimento-module~estabel~506a5e45"), __webpack_require__.e("default~cadastro-cadastro-module~cupons-cupons-module~estabelecimento-estabelecimento-module~estabel~866534b6"), __webpack_require__.e("perfil-estabelecimento-perfil-estabelecimento-module")]).then(__webpack_require__.bind(null, /*! ../perfil-estabelecimento/perfil-estabelecimento.module */ "8Qjl")).then(m => m.PerfilEstabelecimentoPageModule)
+            },
+            {
+                path: 'estabelecimento/editar/:key',
+                loadChildren: () => Promise.all(/*! import() | estabelecimento-estabelecimentos-form-estabelecimentos-form-module */[__webpack_require__.e("default~cadastro-cadastro-module~cupons-cupons-module~estabelecimento-estabelecimento-module~estabel~506a5e45"), __webpack_require__.e("default~cadastro-cadastro-module~cupons-cupons-module~estabelecimento-estabelecimento-module~estabel~866534b6"), __webpack_require__.e("default~estabelecimento-estabelecimentos-form-estabelecimentos-form-module~estabelecimentos-form-est~825c94d4"), __webpack_require__.e("estabelecimento-estabelecimentos-form-estabelecimentos-form-module")]).then(__webpack_require__.bind(null, /*! ../estabelecimento/estabelecimentos-form/estabelecimentos-form.module */ "SzLe")).then(m => m.EstabelecimentosFormPageModule)
             },
             {
                 path: 'equipe',

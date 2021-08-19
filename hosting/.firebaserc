@@ -1,14 +1,23 @@
 {
   "projects": {
     "default": "aproveitepetropolis-61eac",
-      "targets": {
-	"aproveitepetropolis.61eac" : {
-		"hosting": {
-			"appestabelecimento" : [
-				"appestabelecimento"
-			]
-		}
-	}
-  }
+    "targets": {
+      "aproveitepetropolis.61eac": {
+        "hosting": {
+          "appestabelecimento": [
+            "appestabelecimento"
+          ]
+        }
+      }
+    }
+  },
+  "targets": {
+    "aproveitepetropolis-61eac": {
+      "hosting": {
+        "appestabelecimento": [
+          "appestabelecimento"
+        ]
+      }
+    }
   }
 }

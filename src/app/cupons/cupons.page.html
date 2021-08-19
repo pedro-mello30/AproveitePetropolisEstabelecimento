@@ -18,6 +18,7 @@
       <ion-col>
         <h5 class="title ion-margin-bottom">Cupons</h5>
         <div class="cupom-list">
+<!--          <p *ngIf="cupons.length === 0">Não existe cupom cadastrado</p>-->
           <div class="cupom-item" *ngFor="let cupom of cupons">
             <ion-thumbnail slot="start">
               <img *ngIf="cupom.imagem" src="{{cupom.imagem}}">
