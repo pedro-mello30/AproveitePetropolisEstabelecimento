@@ -17,7 +17,6 @@ export class LoginPage implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private usuarioService: UsuarioAuthService,
-    private estabelecimentoService: EstabelecimentoService,
     private router: Router,
     private toast: ToastService
   ) { }

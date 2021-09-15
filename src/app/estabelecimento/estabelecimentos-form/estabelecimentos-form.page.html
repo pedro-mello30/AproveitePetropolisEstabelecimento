@@ -35,7 +35,7 @@
             <ion-item>
               <ion-label position="stacked">Categoria</ion-label>
 
-              <ion-select placeholder="Escolher" formControlName="categoriaKey" [selectedText]="formEstabelecimento.get('categoriaNome').value" (ionChange)="setCategoriaNome($event.target.value)">
+              <ion-select placeholder="Escolher" formControlName="categoriaKey" [selectedText]="formEstabelecimento.get('categoriaNome').value" (ionChange)="setCategoriaNome($event)">
                 <ion-select-option *ngFor="let categoria of categorias | async" value="{{categoria.key}}">{{categoria.nome}}</ion-select-option>
               </ion-select>
             </ion-item>
@@ -43,7 +43,7 @@
             <ion-item *ngIf="(subcategorias | async)?.length > 0">
               <ion-label position="stacked">Subcategoria</ion-label>
 
-              <ion-select placeholder="Escolher" formControlName="subcategoriaKey" [selectedText]="formEstabelecimento.get('subcategoriaNome').value" (ionChange)="setSubcategoriaNome($event.target.value)">
+              <ion-select placeholder="Escolher" formControlName="subcategoriaKey" [selectedText]="formEstabelecimento.get('subcategoriaNome').value" (ionChange)="setSubcategoriaNome($event)">
                 <ion-select-option *ngFor="let subcategoria of subcategorias | async" value="{{subcategoria.key}}">{{subcategoria.nome}}</ion-select-option>
               </ion-select>
             </ion-item>
@@ -154,7 +154,7 @@
             <ion-list-header>Formas de Pagamento</ion-list-header>
             <ion-item *ngFor="let forma of formasPagamento.controls; let i = index" formGroupName="{{ i }}">
               <ion-label>{{ forma.get('nome').value }}</ion-label>
-              <ion-checkbox slot="end" [formControl]="forma.get('isChecked')"></ion-checkbox>
+              <ion-checkbox slot="end" [formControl]="formaPagamentoIsChecked(i)"></ion-checkbox>
             </ion-item>
           </ion-list>
 

@@ -38,6 +38,7 @@ export class EstabelecimentosFormPage implements OnInit {
   membros: Observable<any[]>;
   proprietarios: string[] = [];
 
+
   // formaPagamentos = [
   //   {nome: 'Dinheiro', value: FormaPagamentoTypeEnum.Dinheiro, isChecked: false},
   //   {nome: 'Cartão de crédito', value: FormaPagamentoTypeEnum.Credito, isChecked: false},
@@ -207,6 +208,11 @@ export class EstabelecimentosFormPage implements OnInit {
   get formasPagamento() { return this.formEstabelecimento.get('formasPagamento') as FormArray; }
   get imagens() { return this.formEstabelecimento.get('imagens') as FormArray; }
 
+  formaPagamentoIsChecked(i){
+    const fp = this.formEstabelecimento.get('formasPagamento') as FormArray;
+    return fp.at(i).get('isChecked') as FormControl;
+  }
+
   criarFormulario(){
     this.formEstabelecimento = this.formBuilder.group({
       nome: ['', Validators.required],
@@ -325,7 +331,8 @@ export class EstabelecimentosFormPage implements OnInit {
     this.fileLogoPath = '';
   }
 
-  setCategoriaNome(categoriaKey: string){
+  setCategoriaNome(event: any){
+    const categoriaKey = event.target.value;
     const categ = this.categoriaService.getByKey(categoriaKey).subscribe((categoria: any) => {
       categ.unsubscribe();
       this.setSubcategoriasByCategoria(categoriaKey);
@@ -337,7 +344,8 @@ export class EstabelecimentosFormPage implements OnInit {
     this.subcategorias =  this.subcategoriaService.getByCategoriaKey(categoriaKey);
   }
 
-  setSubcategoriaNome(subcategoriaKey: string){
+  setSubcategoriaNome(event: any){
+    const subcategoriaKey = event.target.value;
     const subcateg = this.subcategoriaService.getByKey(subcategoriaKey).subscribe((subcategoria: any) => {
       subcateg.unsubscribe();
       this.subcategoriaNome.setValue(subcategoria.nome);
