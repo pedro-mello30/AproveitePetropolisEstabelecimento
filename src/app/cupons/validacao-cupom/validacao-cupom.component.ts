@@ -29,8 +29,6 @@ export class ValidacaoCupomComponent implements OnInit {
 
   onSubmit(){
     const update = this.cuponsService.validateCupom(this.estabelecimentoKey, this.form.get('token').value);
-    this.toast.showSuccess("Cupom válidado com sucesso.");
-
   }
 
   criarFormulario(){

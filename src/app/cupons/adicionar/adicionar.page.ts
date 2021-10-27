@@ -46,7 +46,6 @@ export class AdicionarPage implements OnInit {
           nome: cupom.nome,
           descricao: cupom.descricao,
           status: cupom.status,
-          imagem: cupom.imagem
         });
 
         this.imagemUrl = cupom.imagem || '';
@@ -69,6 +68,7 @@ export class AdicionarPage implements OnInit {
   }
 
   get status() { return this.form.get('status'); }
+  get imagem() { return this.form.get('imagem'); }
 
   uploadImagem(event: any){
     if (event.target.files.length){

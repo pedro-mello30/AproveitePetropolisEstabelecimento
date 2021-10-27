@@ -29,5 +29,9 @@ export class CuponsPage implements OnInit {
     });
   }
 
+  doRefresh(event) {
+    location.reload();
+  }
+
 
 }

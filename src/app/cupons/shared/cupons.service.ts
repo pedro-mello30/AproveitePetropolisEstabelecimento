@@ -3,6 +3,7 @@ import {AngularFireDatabase, AngularFireList} from "@angular/fire/database";
 import {AngularFireStorage} from "@angular/fire/storage";
 import {FirebasePath} from "../../core/shared/firebase-path";
 import {filter, finalize, map, take, tap} from 'rxjs/operators';
+import {ToastService} from '../../core/services/toast.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ export class CupomService {
 
   constructor(
     private db: AngularFireDatabase,
-    private storage: AngularFireStorage
+    private storage: AngularFireStorage,
+    private toast: ToastService
   ) {
     this.cuponsRef = this.db.list(FirebasePath.CUPONS);
   }
@@ -104,11 +106,16 @@ export class CupomService {
     const sub = this.getGeneratedByToken(estabelecimentoKey, token).subscribe((cupom: any) => {
       sub.unsubscribe();
       const cupomUp = {status: true, token: ""};
-      return new Promise((resolve, reject) => {
+      if(cupom.length > 0){
         cuponsGRef.update(cupom[0].key, cupomUp)
-          .then(() => resolve(cupom[0].key))
-          .catch(() => reject());
-      });
+          .then(() => {
+            this.toast.showSuccess("Cupom válidado com sucesso.");
+          });
+        return true;
+      }else{
+        this.toast.showError("Cupom inválido.");
+        return false;
+      }
     });
   }
 }
