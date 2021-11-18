@@ -1,0 +1,42 @@
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" offset="3">
+        <img class="logo" src="assets/LogoAproveitePetropolis.PNG">
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12">
+        <p class="title">Esqueci senha</p>
+
+        <form [formGroup]="formEsqueciSenha" (ngSubmit)="onSubmit()">
+
+          <ion-input type="email" formControlName="email" placeholder="E-mail"></ion-input>
+
+
+          <div padding>
+            <ion-button color="primary" expand="block" type="submit">Resetar minha senha</ion-button>
+          </div>
+        </form>
+
+        <a class="button-cadastro" routerLink="/login">Entrar</a>
+        <a class="button-cadastro" routerLink="/login/cadastro">Cadastre-se</a>
+
+
+      </ion-col>
+
+    </ion-row>
+
+    <!--    <ion-row>-->
+    <!--      <ion-col>-->
+    <!--        <p class="title-social">Cadastre-se com</p>-->
+    <!--        <div class="icon-box">-->
+    <!--          <img class="icon-face" src="assets/icon/facebook.svg">-->
+    <!--          <img class="icon-gmail" src="assets/icon/facebook.svg">-->
+    <!--        </div>-->
+    <!--      </ion-col>-->
+    <!--    </ion-row>-->
+  </ion-grid>
+
+</ion-content>

@@ -1,5 +1,5 @@
 {
-  "appId": "com.aproveitepetropolis.app",
+  "appId": "com.aproveitepetropolisestabelecimento.app",
   "appName": "AproveitePetropolisEstabelecimento",
   "bundledWebRuntime": false,
   "npmClient": "npm",
